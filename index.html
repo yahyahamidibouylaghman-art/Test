@@ -1,115 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Tracker</title>
+
+    <title>Toulux™ | Innovative Aluminium Solutions</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f3f4f6; display: flex; justify-content: center; padding: 40px 20px; margin: 0; }
-        .card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; }
-        h2 { color: #1e293b; margin-top: 0; font-size: 20px; text-align: center; }
+/* --- Google Translate Custom Styling --- */
+/* Hide the Google Translate top banner */
+.goog-te-banner-frame.skiptranslate, .skiptranslate iframe {
+    display: none !important;
+}
+body {
+    top: 0px !important; 
+}
+/* Style the dropdown box */
+.goog-te-combo {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    backdrop-filter: blur(5px) !important;
+    transition: all 0.3s ease !important;
+}
+.goog-te-combo:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+/* Make the options inside the dropdown visible (black text) */
+.goog-te-combo option {
+    color: #1f2937 !important;
+    background-color: white !important;
+}
+/* Hide the Google logo and extra text */
+.goog-logo-link {
+    display: none !important;
+}
+.goog-te-gadget {
+    color: transparent !important;
+    font-size: 0px !important;
+}
+.goog-te-gadget-simple {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background-color: #f9fafb; /* Lighter, cleaner background */
+
+            color: #1f2937;
+
+        }
+
+        /* Hide the default details marker */
+
+        details > summary {
+
+            list-style: none;
+
+        }
+
+        details > summary::-webkit-details-marker {
+
+            display: none;
+
+        }
+
         
-        .search-box { display: flex; gap: 8px; margin-bottom: 30px; }
-        input { flex: 1; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; outline: none; }
-        button { background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; }
-        button:hover { background: #2563eb; }
 
-        .result-box { border-top: 1px solid #f1f5f9; padding-top: 20px; }
-        .info-row { display: flex; justify-content: space-between; margin-bottom: 8px; color: #64748b; font-size: 14px; }
-        .info-val { color: #1e293b; font-weight: 600; }
+        /* Smooth opening for details */
 
-        .timeline { display: flex; justify-content: space-between; margin: 30px 0; position: relative; }
-        .timeline::before { content: ''; position: absolute; height: 3px; background: #e2e8f0; width: 85%; top: 50%; left: 7%; z-index: 1; }
-        .dot { width: 30px; height: 30px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: white; font-weight: bold; z-index: 2; transition: 0.3s; }
-        .dot.active { background: #10b981; }
-        .labels { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+        details[open] summary ~ * {
+
+            animation: sweep .3s ease-in-out;
+
+        }
+
+        @keyframes sweep {
+
+            0%    {opacity: 0; transform: translateY(-10px)}
+
+            100%  {opacity: 1; transform: translateY(0)}
+
+        }
+
+/* Professional & Smooth Fade-in Animation */
+@keyframes smoothFadeUp {
+    0% { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.animate-smooth-fade {
+    /* 1.5s duration with a premium easing curve */
+    animation: smoothFadeUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.animate-fade-in-up {
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+
+        /* WhatsApp Floating Button */
+
+        .whatsapp-btn {
+
+            position: fixed;
+
+            bottom: 30px;
+
+            right: 30px;
+
+            background-color: #25D366;
+
+            color: white;
+
+            border-radius: 50px;
+
+            padding: 14px 24px;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+
+            transition: all 0.3s ease;
+
+            z-index: 50;
+
+        }
+
+        .whatsapp-btn:hover {
+
+            transform: translateY(-5px) scale(1.02);
+
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+
+            background-color: #1ebd5c;
+
+        }
+
+        .whatsapp-btn svg {
+
+            width: 24px;
+
+            height: 24px;
+
+            margin-right: 10px;
+
+            fill: currentColor;
+
+        }
+
     </style>
+
 </head>
-<body>
 
-<div class="card">
-    <h2>Order Tracking</h2>
-    <div class="search-box">
-        <input type="text" id="idInput" placeholder="Enter Order ID">
-        <button onclick="window.runTracking()">Track</button>
+<body class="antialiased selection:bg-gray-900 selection:text-white">
+
+
+
+    <!-- Navbar (Responsive & PC Ready) -->
+<nav class="absolute top-0 left-0 w-full px-6 py-6 z-50 flex justify-between items-center text-white">
+    <div class="text-xl md:text-2xl font-bold tracking-widest">TOULUX™</div>
+    
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex gap-8 font-medium drop-shadow-md items-center">
+        <li><a href="index.html" class="hover:text-gray-300 transition">Home</a></li>
+        <li><a href="about.html" class="hover:text-gray-300 transition">About Us</a></li>
+        <li><a href="services.html" class="hover:text-gray-300 transition">Services</a></li>
+        <li><a href="portfolio.html" class="hover:text-gray-300 transition">Portfolio</a></li>
+        <li><a href="index.html" class="hover:text-gray-300 transition">Track Order</a></li>
+    </ul>
+
+    <div class="flex items-center gap-4">
+        <!-- The Google Translate Element -->
+        <div id="google_translate_element"></div>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="menu-btn" class="md:hidden focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
     </div>
-
-    <div id="displayArea" style="display:none;">
-        <div class="result-box">
-            <div class="info-row"><span>Client:</span> <span class="info-val" id="cName">...</span></div>
-            <div class="info-row"><span>Order ID:</span> <span class="info-val" id="oID">...</span></div>
-            <div class="info-row"><span>Type:</span> <span class="info-val" id="type">...</span></div>
-            <div class="info-row"><span>Quantity:</span> <span class="info-val" id="qty">...</span></div>
-            <div class="info-row"><span>Color:</span> <span class="info-val" id="color">...</span></div>
-            <div class="info-row"><span>Brand:</span> <span class="info-val" id="brand">...</span></div>
-            <div class="info-row"><span>Dimensions:</span> <span class="info-val" id="dimensions">...</span></div>
-            <div class="info-row"><span>Created:</span> <span class="info-val" id="created">...</span></div>
-        </div>
+</nav>
+<!-- Mobile Menu Overlay (Hidden by default) -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-gray-900 bg-opacity-95 flex-col items-center justify-center opacity-0 transition-opacity duration-300">
+        <!-- Close Button -->
+        <button id="close-btn" class="absolute top-6 right-6 text-white focus:outline-none hover:text-gray-300">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
         
-        <div class="timeline">
-            <div class="dot" id="d1">1</div>
-            <div class="dot" id="d2">2</div>
-            <div class="dot" id="d3">3</div>
-        </div>
-        <div class="labels">
-            <span>Pending</span><span>Progress</span><span>Finished</span>
-        </div>
-        <p id="statusMsg" style="text-align:center; font-weight:600; color:#334155; margin-top:20px;"></p>
+        <!-- Mobile Links -->
+        <ul class="flex flex-col gap-8 text-2xl font-semibold text-white text-center">
+            <li><a href="index.html" class="hover:text-gray-300 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-gray-300 transition">About Us</a></li>
+            <li><a href="services.html" class="hover:text-gray-300 transition">Services</a></li>
+            <li><a href="portfolio.html" class="hover:text-gray-300 transition">Portfolio</a></li>
+            <li><a href="index.html" class="hover:text-gray-300 transition">Track Order</a></li>
+        </ul>
     </div>
+
+<!-- Updated Hero Section -->
+<header class="relative w-full h-[50vh] md:h-[70vh] min-h-[400px] flex items-end justify-start text-left bg-gray-900 bg-cover bg-center p-8 md:p-16" style="background-image: linear-gradient(rgba(17, 24, 39, 0.4), rgba(17, 24, 39, 0.8)), url('https://images.unsplash.com/photo-1518557984649-7b161c230cfa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+
+    <div class="max-w-3xl">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-[1.1] tracking-tight drop-shadow-md">
+            Innovative Aluminium <br/> Solutions
+        </h1>
+        <p class="text-lg md:text-xl text-gray-200 font-light drop-shadow-md border-l-2 border-white pl-4">
+            Premium products for doors, windows, facades, and more
+        </p>
+    </div>
+
+</header>
+
+
+
+    <!-- Main Container (Wider for PC, padded for Mobile) -->
+
+    <main class="max-w-6xl mx-auto px-6 py-16 md:py-24 text-center">
+
+
+
+<!-- About Section -->
+        <section class="mb-24 flex flex-col items-center">
+            
+            <!-- Image in Center (No shadow, no hover effect) -->
+            <div class="w-full max-w-3xl h-64 md:h-[400px] overflow-hidden rounded-2xl mb-12">
+                <img src="https://aluminiumdumaroc.com/wp-content/uploads/2025/11/home-web-22-860x532.png" alt="Aluminum Profiles" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Heading -->
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-gray-900 tracking-wide animate-smooth-fade">About Toulux</h2>
+
+            <!-- Description -->
+            <p class="text-base md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-light">
+                "With over <span class="font-semibold text-gray-900">230+ completed projects</span> across Morocco, Toulux™ provides high-quality aluminum accessories, profiles, and professional installation services tailored to your exact needs."
+            </p>
+
+        </section>
+
+
+
+        <!-- Products Section -->
+
+        <section class="mb-24">
+
+            <h2 class="text-3xl md:text-4xl font-semibold mb-12 text-gray-900">Our Premium Products</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+
+                <!-- Product 1 -->
+
+                <div class="flex flex-col items-center group cursor-pointer bg-white p-4 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+
+                    <div class="w-full h-48 md:h-64 overflow-hidden rounded-xl mb-6">
+
+                        <img src="https://images.unsplash.com/photo-1621618991666-51e93ea722bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Hardware" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition duration-500 group-hover:scale-110">
+
+                    </div>
+
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 text-gray-900">Hardware & Accessoires</h3>
+
+                    <a href="learn-more.html" class="text-sm font-medium uppercase tracking-wider bg-gray-50 text-gray-800 border border-gray-300 py-3 px-6 w-full rounded-lg text-center group-hover:bg-gray-900 group-hover:text-white group-hover:border-gray-900 transition-colors duration-300">Learn more</a>
+
+                </div>
+
+                <!-- Product 2 -->
+
+                <div class="flex flex-col items-center group cursor-pointer bg-white p-4 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+
+                    <div class="w-full h-48 md:h-64 overflow-hidden rounded-xl mb-6">
+
+                        <img src="https://images.unsplash.com/photo-1518557984649-7b161c230cfa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Panels" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition duration-500 group-hover:scale-110">
+
+                    </div>
+
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 text-gray-900">Composite Panels</h3>
+
+                    <a href="learn-more.html" class="text-sm font-medium uppercase tracking-wider bg-gray-50 text-gray-800 border border-gray-300 py-3 px-6 w-full rounded-lg text-center group-hover:bg-gray-900 group-hover:text-white group-hover:border-gray-900 transition-colors duration-300">Learn more</a>
+
+                </div>
+
+                <!-- Product 3 -->
+
+                <div class="flex flex-col items-center group cursor-pointer bg-white p-4 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+
+                    <div class="w-full h-48 md:h-64 overflow-hidden rounded-xl mb-6">
+
+                        <img src="https://images.unsplash.com/photo-1616851351187-5769baea9242?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Profiles" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition duration-500 group-hover:scale-110">
+
+                    </div>
+
+                    <h3 class="text-lg md:text-xl font-semibold mb-4 text-gray-900">Insulating Profiles</h3>
+
+                    <a href="learn-more.html" class="text-sm font-medium uppercase tracking-wider bg-gray-50 text-gray-800 border border-gray-300 py-3 px-6 w-full rounded-lg text-center group-hover:bg-gray-900 group-hover:text-white group-hover:border-gray-900 transition-colors duration-300">Learn more</a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- What We Offer Section -->
+
+        <section class="mb-24 bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100">
+
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-gray-900">What We Offer</h2>
+
+            <p class="text-base md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10 text-center font-light">
+
+                At Toulux, we specialize in delivering high-quality aluminum accessories and profiles tailored to your needs.
+
+            </p>
+
+
+
+            <div class="max-w-3xl mx-auto text-left border-t border-gray-200 divide-y divide-gray-200">
+
+                <details class="group py-5">
+
+                    <summary class="flex justify-between items-center cursor-pointer text-lg md:text-xl font-medium text-gray-800 hover:text-blue-600 transition">
+
+                        <span>Expert <span class="text-gray-500 font-normal">Installation</span></span>
+
+                        <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+
+                    </summary>
+
+                    <p class="text-base text-gray-600 mt-4 pl-2 font-light">Professional, tailor-made installation services ensuring precision, durability, and a flawless finish for every project.</p>
+
+                </details>
+
+                <details class="group py-5">
+
+                    <summary class="flex justify-between items-center cursor-pointer text-lg md:text-xl font-medium text-gray-800 hover:text-blue-600 transition">
+
+                        <span>Nationwide <span class="text-gray-500 font-normal">Shipping</span></span>
+
+                        <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+
+                    </summary>
+
+                    <p class="text-base text-gray-600 mt-4 pl-2 font-light">Reliable and swift delivery of premium products all across Morocco, directly to your construction site.</p>
+
+                </details>
+
+                <details class="group py-5">
+
+                    <summary class="flex justify-between items-center cursor-pointer text-lg md:text-xl font-medium text-gray-800 hover:text-blue-600 transition">
+
+                        <span>Proven <span class="text-gray-500 font-normal">Experience</span></span>
+
+                        <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+
+                    </summary>
+
+                    <p class="text-base text-gray-600 mt-4 pl-2 font-light">With over 230+ completed projects countrywide, our track record speaks to our expertise and dedication.</p>
+
+                </details>
+
+                <details class="group py-5">
+
+                    <summary class="flex justify-between items-center cursor-pointer text-lg md:text-xl font-medium text-gray-800 hover:text-blue-600 transition">
+
+                        <span>Customer <span class="text-gray-500 font-normal">Satisfaction</span></span>
+
+                        <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+
+                    </summary>
+
+                    <p class="text-base text-gray-600 mt-4 pl-2 font-light">Trusted by hundreds of clients across Morocco, we prioritize long-term relationships and unmatched service quality.</p>
+
+                </details>
+
+            </div>
+
+
+
+            <p class="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mt-10 font-light">
+
+                We combine reliability, craftsmanship, and innovation to provide aluminum solutions you can count on.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- Information Grid Section (Why Choose Us & Hours) -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 text-left">
+
+            
+
+            <!-- Why Choose Us -->
+
+            <section class="bg-gray-900 text-white p-8 md:p-12 rounded-3xl shadow-lg">
+
+                <h2 class="text-2xl md:text-3xl font-semibold mb-8 border-b border-gray-700 pb-4">Why Choose Us?</h2>
+
+                <ul class="text-base md:text-lg space-y-4 font-light">
+
+                    <li class="flex items-center gap-3"><svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> 90+ successful installations</li>
+
+                    <li class="flex items-center gap-3"><svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Nationwide shipping</li>
+
+                    <li class="flex items-center gap-3"><svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Skilled professionals</li>
+
+                    <li class="flex items-center gap-3"><svg class="w-6 h-6 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Trusted by satisfied clients</li>
+
+                </ul>
+
+            </section>
+
+
+
+            <!-- Opening Hours -->
+
+            <section class="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100">
+
+                <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-gray-900 border-b border-gray-200 pb-4">Our Opening Hours</h2>
+
+                <ul class="text-base md:text-lg text-gray-700 space-y-4 font-light">
+
+                    <li class="flex justify-between"><span>Monday</span> <span class="font-medium text-gray-900">9:00 - 13:00 / 14:30 - 18:30</span></li>
+
+                    <li class="flex justify-between"><span>Tuesday</span> <span class="font-medium text-gray-900">9:00 - 13:00 / 14:30 - 18:30</span></li>
+
+                    <li class="flex justify-between"><span>Wednesday</span> <span class="font-medium text-gray-900">9:00 - 13:00 / 14:30 - 18:30</span></li>
+
+                    <li class="flex justify-between"><span>Thursday</span> <span class="font-medium text-gray-900">9:00 - 13:00 / 14:30 - 18:30</span></li>
+
+                    <li class="flex justify-between"><span>Friday</span> <span class="font-medium text-gray-900">9:00 - 13:00 / 14:30 - 18:30</span></li>
+
+                    <li class="flex justify-between"><span>Saturday</span> <span class="font-medium text-gray-900">9:00 - 13:00 / 14:30 - 18:30</span></li>
+
+                    <li class="flex justify-between pt-2 border-t border-gray-100"><span>Sunday</span> <span class="font-bold text-red-500">Closed</span></li>
+
+                </ul>
+
+            </section>
+
+
+
+        </div>
+
+        <!-- Track Order CTA Section -->
+        <section class="my-24 bg-gradient-to-r from-gray-800 to-gray-900 text-white p-12 md:p-16 rounded-3xl shadow-lg">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6">Already Have a Project with Us?</h2>
+            <p class="text-base md:text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
+                Track your order in real-time and stay updated on your project status. Click below to access the tracking system.
+            </p>
+            <a href="index.html" class="inline-block bg-white text-gray-900 font-semibold py-4 px-8 rounded-lg hover:bg-gray-100 transition-colors duration-300">
+                Track Your Order Now
+            </a>
+        </section>
+
+    </main>
+
+
+
+    <!-- Footer -->
+
+    <footer class="bg-white pt-16 pb-8 border-t border-gray-200">
+
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-left">
+
+            <!-- Contact Information -->
+
+            <div>
+
+                <h3 class="text-2xl font-semibold text-gray-900 mb-6">Contact Us:</h3>
+
+                <ul class="text-base text-gray-600 space-y-4 font-light">
+
+                    <li class="flex items-start gap-3">
+
+                        <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+
+                        <span>Location : Morocco (Bd hassan II, Nador, Al aroui)</span>
+
+                    </li>
+
+                    <li class="flex items-center gap-3">
+
+                        <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+
+                        <span>Phone : +212 6 76 35 78 10</span>
+
+                    </li>
+
+                    <!-- Footer email link -->
+<li class="flex items-center gap-3">
+    <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+    <!-- Update the href below -->
+    <span>email : <a href="mailto:touluxservice@gmail.com" class="hover:text-blue-600 transition">touluxservice@gmail.com</a></span>
+</li>
+
+                </ul>
+
+            </div>
+
+            <!-- Quick Links -->
+
+<!-- Footer Quick Links -->
+<div class="flex flex-col space-y-3 text-base text-gray-600 font-light">
+    <h3 class="text-xl font-semibold text-gray-900 mb-3">Quick Links</h3>
+    <a href="about.html" class="hover:text-blue-600 transition">About Us</a>
+    <a href="services.html" class="hover:text-blue-600 transition">Services</a>
+    <a href="portfolio.html" class="hover:text-blue-600 transition">Portfolio</a>
+    <a href="contact.html" class="hover:text-blue-600 transition">Contact</a>
+    <a href="index.html" class="hover:text-blue-600 transition">Track Order</a>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-    window.runTracking = async function() {
-        const orderId = document.getElementById('idInput').value.trim();
-        const display = document.getElementById('displayArea');
-        const msg = document.getElementById('statusMsg');
-        
-        if (!orderId) return alert("Please enter an ID");
+<!-- Track Order Section in Footer -->
+<div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+    <h3 class="text-xl font-semibold text-gray-900 mb-3">Order Tracking</h3>
+    <p class="text-sm text-gray-600 mb-4 font-light">Track your project status in real-time</p>
+    <a href="index.html" class="inline-block w-full text-center bg-gray-900 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300 text-sm">
+        Track Now
+    </a>
+</div>
 
-        const supabase = window.supabase.createClient(
-            "https://svkethyotokfbhejgtgb.supabase.co",
-            "sb_publishable_vwXSA09ih-8pX1IY38UKZg_VZcoQJ7U"
-        );
+            </div>
 
-        display.style.display = 'block';
-        msg.innerHTML = "Searching...";
+        </div>
 
-        // Query including 'created_at'
-        const { data, error } = await supabase
-            .from('Tracking')
-            .select('current_status, client_name, type, quantity, color, brand, dimensions, created_at')
-            .eq('tracking_id', orderId)
-            .single();
 
-        if (error) return alert("Error: " + error.message);
 
-        // Fill Data
-        document.getElementById('cName').innerText = data.client_name || "N/A";
-        document.getElementById('oID').innerText = orderId;
-        document.getElementById('type').innerText = data.type || "N/A";
-        document.getElementById('qty').innerText = data.quantity || "0";
-        document.getElementById('color').innerText = data.color || "N/A";
-        document.getElementById('brand').innerText = data.brand || "N/A";
-        document.getElementById('dimensions').innerText = data.dimensions || "N/A";
-        
-        // Format and Fill Date
-        const date = new Date(data.created_at).toLocaleDateString();
-        document.getElementById('created').innerText = data.created_at ? date : "N/A";
-        
-        // Reset and Set Status
-        document.getElementById('d1').className = 'dot';
-        document.getElementById('d2').className = 'dot';
-        document.getElementById('d3').className = 'dot';
+        <!-- Google Maps Location -->
 
-        const s = data.current_status;
-        if (s >= 1) document.getElementById('d1').classList.add('active');
-        if (s >= 2) document.getElementById('d2').classList.add('active');
-        if (s >= 3) document.getElementById('d3').classList.add('active');
-        
-        const map = {1: "Pending", 2: "In Progress", 3: "Finished"};
-        msg.innerHTML = map[s] || "Status Code: " + s;
-    };
-</script>
+        <div class="max-w-6xl mx-auto px-6 mb-12">
+
+            <div class="w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-md border border-gray-200">
+
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3267.919577044524!2d-3.0140907877164063!3d35.00871826650863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd77af7b6d8fc231%3A0x726f124066cd922f!2sTOULUX!5e0!3m2!1sen!2sma!4v1782535092088!5m2!1sen!2sma" class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="text-center border-t border-gray-100 pt-8">
+
+            <p class="text-sm md:text-base text-gray-900 font-semibold mb-2">Toulux™ - Trusted Aluminium Solutions</p>
+
+            <p class="text-xs text-gray-400">&copy; 2026 Toulux. All rights reserved.</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- WhatsApp Hover Button -->
+
+    <a href="https://wa.me/212676357810" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+
+        </svg>
+
+        WhatsApp
+
+    </a>
+
+
+
+</body>
+   <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // Only run if the elements exist to prevent the error
+            if (menuBtn && closeBtn && mobileMenu) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    setTimeout(() => mobileMenu.classList.add('opacity-100'), 10);
+                    menuBtn.classList.add('hidden');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('opacity-100');
+                    menuBtn.classList.remove('hidden');
+                    setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+                });
+            }
+        });
+    </script>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', 
+                includedLanguages: 'en,fr,ar,es', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
