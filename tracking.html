@@ -1,24 +1,472 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Toulux Aluminium Solutions</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracker | Toulux™</title>
+    
+    <!-- Tailwind CSS & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Google Translate Custom Styling --- */
+        /* Hide the Google Translate top banner */
+        .goog-te-banner-frame.skiptranslate, .skiptranslate iframe {
+            display: none !important;
+        }
+        body {
+            top: 0px !important; 
+        }
+        /* Style the dropdown box */
+        .goog-te-combo {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 8px !important;
+            padding: 8px 12px !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            backdrop-filter: blur(5px) !important;
+            transition: all 0.3s ease !important;
+        }
+        .goog-te-combo:hover {
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+        }
+        /* Make the options inside the dropdown visible (black text) */
+        .goog-te-combo option {
+            color: #1f2937 !important;
+            background-color: white !important;
+        }
+        /* Hide the Google logo and extra text */
+        .goog-logo-link {
+            display: none !important;
+        }
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0px !important;
+        }
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+
+        /* Smooth Fade-in Animation */
+        @keyframes smoothFadeUp {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-smooth-fade {
+            animation: smoothFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Timeline Custom CSS integrated with Tailwind colors */
+        .timeline-container {
+            margin: 40px 0;
+        }
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin: 30px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            height: 4px;
+            background: #e5e7eb; /* Tailwind gray-200 */
+            width: 80%;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            z-index: 1;
+            border-radius: 2px;
+        }
+        .dot {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 4px solid #e5e7eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: #9ca3af; /* Tailwind gray-400 */
+            font-weight: 700;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .dot.active {
+            background: #111827; /* Tailwind gray-900 */
+            border-color: #111827;
+            color: white;
+            box-shadow: 0 8px 20px rgba(17, 24, 39, 0.25);
+            transform: scale(1.15) translateY(-2px);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #111827;
+            margin: 0 3px;
+            animation: loadingPulse 1.4s infinite;
+        }
+        .loading:nth-child(2) { animation-delay: 0.2s; }
+        .loading:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1) translateY(0); }
+            50% { opacity: 1; transform: scale(1.3) translateY(-6px); }
+        }
+    </style>
 </head>
-<body>
+<body class="antialiased selection:bg-gray-900 selection:text-white">
 
-    <h1>Welcome to Toulux Aluminium Solutions</h1>
-    
-    <p>We specialize in precision-engineered aluminium framing and structural assembly for custom projects.</p>
-    
-    <p>Our commitment to quality means your frames are built to last, from the first cut to the final assembly.</p>
+    <!-- Navbar (Responsive & PC Ready) -->
+    <nav class="absolute top-0 left-0 w-full px-6 py-6 z-50 flex justify-between items-center text-white">
+        <div class="text-xl md:text-2xl font-bold tracking-widest">TOULUX™</div>
+        
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex gap-8 font-medium drop-shadow-md items-center">
+            <li><a href="tracking.html" class="hover:text-gray-300 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-gray-300 transition">About Us</a></li>
+            <li><a href="services.html" class="hover:text-gray-300 transition">Services</a></li>
+            <li><a href="portfolio.html" class="hover:text-gray-300 transition">Portfolio</a></li>
+            <li><a href="index.html" class="hover:text-gray-300 transition">Track Order</a></li>
+        </ul>
 
-    <br>
-    
-    <p>Already have a project with us?</p>
-    
-    <!-- This button navigates to your tracking page -->
-    <button onclick="window.location.href='index.html'">
-        Already has a project? Track it
-    </button>
+        <div class="flex items-center gap-4">
+            <!-- The Google Translate Element -->
+            <div id="google_translate_element"></div>
 
+            <!-- Mobile Hamburger Button -->
+            <button id="menu-btn" class="md:hidden focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </nav>
+    <!-- Mobile Menu Overlay (Hidden by default) -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-gray-900 bg-opacity-95 flex-col items-center justify-center opacity-0 transition-opacity duration-300">
+        <!-- Close Button -->
+        <button id="close-btn" class="absolute top-6 right-6 text-white focus:outline-none hover:text-gray-300">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <!-- Mobile Links -->
+        <ul class="flex flex-col gap-8 text-2xl font-semibold text-white text-center">
+            <li><a href="tracking.html" class="hover:text-gray-300 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-gray-300 transition">About Us</a></li>
+            <li><a href="services.html" class="hover:text-gray-300 transition">Services</a></li>
+            <li><a href="portfolio.html" class="hover:text-gray-300 transition">Portfolio</a></li>
+            <li><a href="index.html" class="hover:text-gray-300 transition">Track Order</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-[50vh] md:h-[70vh] min-h-[400px] flex items-end justify-start text-left bg-gray-900 bg-cover bg-center p-8 md:p-16" style="background-image: linear-gradient(rgba(17, 24, 39, 0.4), rgba(17, 24, 39, 0.8)), url('https://images.unsplash.com/photo-1518557984649-7b161c230cfa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+
+        <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-[1.1] tracking-tight drop-shadow-md">
+                Track Your <br/> Order
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 font-light drop-shadow-md border-l-2 border-white pl-4">
+                Real-time updates on your Toulux project
+            </p>
+        </div>
+
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-16 md:py-24 text-center">
+        
+        <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100 animate-smooth-fade relative overflow-hidden">
+            
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 tracking-tight" data-en="📦 Order Tracking" data-fr="📦 Suivi des Commandes" data-es="📦 Rastreo de Pedidos" data-de="📦 Bestellverfolgung" data-ar="📦 تتبع الطلبات">📦 Order Tracking</h2>
+            
+            <!-- Search Box -->
+            <div class="flex flex-col md:flex-row gap-4 mb-8">
+                <input type="text" id="idInput" class="flex-1 px-5 py-4 border border-gray-200 rounded-xl text-sm md:text-base outline-none focus:border-gray-900 focus:ring-4 focus:ring-gray-900/10 transition-all bg-gray-50 text-gray-900 font-medium placeholder-gray-400" placeholder="Enter Order ID..." data-en="Enter Order ID..." data-fr="Entrez l'ID de commande..." data-es="Ingrese el ID del pedido..." data-de="Geben Sie die Bestellnummer ein..." data-ar="أدخل معرف الطلب...">
+                
+                <button onclick="window.runTracking()" class="bg-gray-900 text-white px-8 py-4 rounded-xl font-semibold text-sm md:text-base hover:-translate-y-1 hover:shadow-lg hover:shadow-gray-900/30 transition-all active:translate-y-0 tracking-wide uppercase" data-en="Track" data-fr="Suivi" data-es="Rastrear" data-de="Verfolgen" data-ar="تتبع">Track</button>
+            </div>
+
+            <!-- Results Display Area -->
+            <div id="displayArea" style="display:none;" class="animate-smooth-fade">
+                
+                <!-- Information Card -->
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 md:p-8 mb-8">
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 last:border-none transition-colors hover:bg-gray-100 px-3 rounded-lg">
+                        <span class="text-gray-500 font-medium text-sm md:text-base" data-en="Client" data-fr="Client" data-es="Cliente" data-de="Kunde" data-ar="العميل">Client</span> 
+                        <span class="font-semibold text-gray-900 text-sm md:text-base text-right break-words" id="cName">...</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 last:border-none transition-colors hover:bg-gray-100 px-3 rounded-lg">
+                        <span class="text-gray-500 font-medium text-sm md:text-base" data-en="Order ID" data-fr="ID de Commande" data-es="ID del Pedido" data-de="Bestellnummer" data-ar="معرف الطلب">Order ID</span> 
+                        <span class="font-semibold text-gray-900 text-sm md:text-base text-right break-words" id="oID">...</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 last:border-none transition-colors hover:bg-gray-100 px-3 rounded-lg">
+                        <span class="text-gray-500 font-medium text-sm md:text-base" data-en="Type" data-fr="Type" data-es="Tipo" data-de="Typ" data-ar="النوع">Type</span> 
+                        <span class="font-semibold text-gray-900 text-sm md:text-base text-right break-words" id="type">...</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 last:border-none transition-colors hover:bg-gray-100 px-3 rounded-lg">
+                        <span class="text-gray-500 font-medium text-sm md:text-base" data-en="Quantity" data-fr="Quantité" data-es="Cantidad" data-de="Menge" data-ar="الكمية">Quantity</span> 
+                        <span class="font-semibold text-gray-900 text-sm md:text-base text-right break-words" id="qty">...</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 last:border-none transition-colors hover:bg-gray-100 px-3 rounded-lg">
+                        <span class="text-gray-500 font-medium text-sm md:text-base" data-en="Color" data-fr="Couleur" data-es="Color" data-de="Farbe" data-ar="اللون">Color</span> 
+                        <span class="font-semibold text-gray-900 text-sm md:text-base text-right break-words" id="color">...</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 last:border-none transition-colors hover:bg-gray-100 px-3 rounded-lg">
+                        <span class="text-gray-500 font-medium text-sm md:text-base" data-en="Brand" data-fr="Marque" data-es="Marca" data-de="Marke" data-ar="العلامة التجارية">Brand</span> 
+                        <span class="font-semibold text-gray-900 text-sm md:text-base text-right break-words" id="brand">...</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 last:border-none transition-colors hover:bg-gray-100 px-3 rounded-lg">
+                        <span class="text-gray-500 font-medium text-sm md:text-base" data-en="Dimensions" data-fr="Dimensions" data-es="Dimensiones" data-de="Abmessungen" data-ar="الأبعاد">Dimensions</span> 
+                        <span class="font-semibold text-gray-900 text-sm md:text-base text-right break-words" id="dimensions">...</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 last:border-none transition-colors hover:bg-gray-100 px-3 rounded-lg">
+                        <span class="text-gray-500 font-medium text-sm md:text-base" data-en="Created" data-fr="Créé" data-es="Creado" data-de="Erstellt" data-ar="تم الإنشاء">Created</span> 
+                        <span class="font-semibold text-gray-900 text-sm md:text-base text-right break-words" id="created">...</span>
+                    </div>
+                </div>
+                
+                <!-- Timeline Section -->
+                <div class="timeline-container">
+                    <div class="timeline">
+                        <div class="dot" id="d1">1</div>
+                        <div class="dot" id="d2">2</div>
+                        <div class="dot" id="d3">3</div>
+                    </div>
+                    <div class="flex justify-between text-[11px] md:text-xs font-bold text-gray-400 uppercase tracking-wider px-1">
+                        <span data-en="Pending" data-fr="En Attente" data-es="Pendiente" data-de="Ausstehend" data-ar="قيد الانتظار">Pending</span>
+                        <span data-en="Progress" data-fr="En Cours" data-es="En Progreso" data-de="Fortschritt" data-ar="قيد التقدم">Progress</span>
+                        <span data-en="Finished" data-fr="Terminé" data-es="Terminado" data-de="Fertig" data-ar="اكتمل">Finished</span>
+                    </div>
+                </div>
+
+                <p id="statusMsg" class="text-center font-bold text-gray-900 mt-8 text-base md:text-lg min-h-[28px] tracking-wide"></p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 pb-8 border-t border-gray-200 mt-24">
+
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-left">
+
+            <!-- Contact Information -->
+            <div>
+                <h3 class="text-2xl font-semibold text-gray-900 mb-6">Contact Us:</h3>
+                <ul class="text-base text-gray-600 space-y-4 font-light">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span>Location : Morocco (Bd hassan II, Nador, Al aroui)</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <span>Phone : +212 6 76 35 78 10</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <span>email : <a href="mailto:touluxservice@gmail.com" class="hover:text-blue-600 transition">touluxservice@gmail.com</a></span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="flex flex-col space-y-3 text-base text-gray-600 font-light">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Quick Links</h3>
+                <a href="tracking.html" class="hover:text-blue-600 transition">Home</a>
+                <a href="about.html" class="hover:text-blue-600 transition">About Us</a>
+                <a href="services.html" class="hover:text-blue-600 transition">Services</a>
+                <a href="portfolio.html" class="hover:text-blue-600 transition">Portfolio</a>
+                <a href="index.html" class="hover:text-blue-600 transition">Track Order</a>
+            </div>
+
+            <!-- Track Order Section in Footer -->
+            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Order Tracking</h3>
+                <p class="text-sm text-gray-600 mb-4 font-light">Track your project status in real-time</p>
+                <a href="index.html" class="inline-block w-full text-center bg-gray-900 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300 text-sm">
+                    Track Now
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Google Maps Location -->
+        <div class="max-w-6xl mx-auto px-6 mb-12">
+            <div class="w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-md border border-gray-200">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3267.919577044524!2d-3.0140907877164063!3d35.00871826650863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd77af7b6d8fc231%3A0x726f124066cd922f!2sTOULUX!5e0!3m2!1sen!2sma!4v1782535092088!5m2!1sen!2sma" class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+        </div>
+
+        <div class="text-center border-t border-gray-100 pt-8">
+            <p class="text-sm md:text-base text-gray-900 font-semibold mb-2">Toulux™ - Trusted Aluminium Solutions</p>
+            <p class="text-xs text-gray-400">&copy; 2026 Toulux. All rights reserved.</p>
+        </div>
+
+    </footer>
+
+</body>
+   <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // Only run if the elements exist to prevent the error
+            if (menuBtn && closeBtn && mobileMenu) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    setTimeout(() => mobileMenu.classList.add('opacity-100'), 10);
+                    menuBtn.classList.add('hidden');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('opacity-100');
+                    menuBtn.classList.remove('hidden');
+                    setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+                });
+            }
+        });
+    </script>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', 
+                includedLanguages: 'en,fr,ar,es', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- Supabase & Tracking Script -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    let currentLanguage = 'en';
+
+    const translations = {
+        'error_enter_id': {
+            en: 'Please enter an Order ID',
+            fr: 'Veuillez entrer un ID de commande',
+            es: 'Ingrese un ID de pedido',
+            de: 'Bitte geben Sie eine Bestellnummer ein',
+            ar: 'يرجى إدخال معرف الطلب'
+        },
+        'error_prefix': {
+            en: 'Error: ',
+            fr: 'Erreur: ',
+            es: 'Error: ',
+            de: 'Fehler: ',
+            ar: 'خطأ: '
+        },
+        'pending': {
+            en: '🟡 Pending - Your order is awaiting processing',
+            fr: '🟡 En Attente - Votre commande est en attente de traitement',
+            es: '🟡 Pendiente - Su pedido está esperando procesamiento',
+            de: '🟡 Ausstehend - Ihre Bestellung wartet auf Bearbeitung',
+            ar: '🟡 قيد الانتظار - طلبك في انتظار المعالجة'
+        },
+        'progress': {
+            en: '⚡ In Progress - Your order is being prepared',
+            fr: '⚡ En Cours - Votre commande est en préparation',
+            es: '⚡ En Progreso - Su pedido se está preparando',
+            de: '⚡ Wird bearbeitet - Ihre Bestellung wird vorbereitet',
+            ar: '⚡ قيد التقدم - يتم تحضير طلبك'
+        },
+        'finished': {
+            en: '✅ Finished - Your order is ready!',
+            fr: '✅ Terminé - Votre commande est prête!',
+            es: '✅ Terminado - ¡Su pedido está listo!',
+            de: '✅ Fertig - Ihre Bestellung ist bereit!',
+            ar: '✅ اكتمل - طلبك جاهز!'
+        },
+        'status_code': {
+            en: 'Status Code: ',
+            fr: 'Code de statut: ',
+            es: 'Código de estado: ',
+            de: 'Statuscode: ',
+            ar: 'رمز الحالة: '
+        }
+    };
+
+    window.runTracking = async function() {
+        const orderId = document.getElementById('idInput').value.trim();
+        const display = document.getElementById('displayArea');
+        const msg = document.getElementById('statusMsg');
+        
+        if (!orderId) return alert(translations['error_enter_id'][currentLanguage]);
+
+        const supabase = window.supabase.createClient(
+            "https://svkethyotokfbhejgtgb.supabase.co",
+            "sb_publishable_vwXSA09ih-8pX1IY38UKZg_VZcoQJ7U"
+        );
+
+        display.style.display = 'block';
+        msg.innerHTML = '<span class="loading"></span><span class="loading"></span><span class="loading"></span>';
+
+        const { data, error } = await supabase
+            .from('Tracking')
+            .select('current_status, client_name, type, quantity, color, brand, dimensions, created_at')
+            .eq('tracking_id', orderId)
+            .single();
+
+        if (error) {
+            msg.innerHTML = "";
+            return alert(translations['error_prefix'][currentLanguage] + error.message);
+        }
+
+        // Fill Data
+        document.getElementById('cName').innerText = data.client_name || "N/A";
+        document.getElementById('oID').innerText = orderId;
+        document.getElementById('type').innerText = data.type || "N/A";
+        document.getElementById('qty').innerText = data.quantity || "0";
+        document.getElementById('color').innerText = data.color || "N/A";
+        document.getElementById('brand').innerText = data.brand || "N/A";
+        document.getElementById('dimensions').innerText = data.dimensions || "N/A";
+        
+        const date = new Date(data.created_at).toLocaleDateString();
+        document.getElementById('created').innerText = data.created_at ? date : "N/A";
+        
+        // Reset and Set Status
+        document.getElementById('d1').className = 'dot';
+        document.getElementById('d2').className = 'dot';
+        document.getElementById('d3').className = 'dot';
+
+        const s = data.current_status;
+        if (s >= 1) document.getElementById('d1').classList.add('active');
+        if (s >= 2) document.getElementById('d2').classList.add('active');
+        if (s >= 3) document.getElementById('d3').classList.add('active');
+        
+        const statusMap = {
+            1: translations['pending'][currentLanguage],
+            2: translations['progress'][currentLanguage],
+            3: translations['finished'][currentLanguage]
+        };
+        msg.innerHTML = statusMap[s] || translations['status_code'][currentLanguage] + s;
+    };
+</script>
 </body>
 </html>
